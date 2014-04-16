@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ServiceProviderService WSDL service -->
+
+  <service name="ServiceProvider" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://amazon.com"/>
+      <parameter name="wsdlServiceElement" value="ServiceProviderService"/>
+      <parameter name="schemaQualified" value="http://dto.amazon.com,http://amazon.com"/>
+      <parameter name="wsdlServicePort" value="ServiceProvider"/>
+      <parameter name="className" value="com.amazon.ServiceProvider"/>
+      <parameter name="wsdlPortType" value="ServiceProvider"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://amazon.com" name="addCategory" qname="operNS:addCategory" soapAction="">
+        <parameter xmlns:pns="http://amazon.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:categoryName" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://amazon.com" xmlns:retNS="http://amazon.com" xmlns:rtns="http://dto.amazon.com" name="authenticate" qname="operNS:authenticate" returnQName="retNS:authenticateReturn" returnType="rtns:UserDTO" soapAction="">
+        <parameter xmlns:pns="http://amazon.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:username" type="tns:string"/>
+        <parameter xmlns:pns="http://amazon.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://amazon.com" name="checkout" qname="operNS:checkout" soapAction="">
+        <parameter xmlns:pns="http://amazon.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://amazon.com" xmlns:retNS="http://amazon.com" xmlns:rtns="http://dto.amazon.com" name="getShoppingCart" qname="operNS:getShoppingCart" returnQName="retNS:getShoppingCartReturn" returnType="rtns:ShoppingCartDTO" soapAction="">
+        <parameter xmlns:pns="http://amazon.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://amazon.com" xmlns:retNS="http://amazon.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getShoppingCartItemCount" qname="operNS:getShoppingCartItemCount" returnQName="retNS:getShoppingCartItemCountReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:pns="http://amazon.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://amazon.com" name="removeFromCart" qname="operNS:removeFromCart" soapAction="">
+        <parameter xmlns:pns="http://amazon.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:int"/>
+        <parameter xmlns:pns="http://amazon.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:productId" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://amazon.com" xmlns:retNS="http://amazon.com" xmlns:rtns="http://dto.amazon.com" name="getAllCategories" qname="operNS:getAllCategories" returnQName="retNS:getAllCategoriesReturn" returnType="rtns:CategoryDTO" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://amazon.com" xmlns:retNS="http://amazon.com" xmlns:rtns="http://dto.amazon.com" name="getProductsByCategoryId" qname="operNS:getProductsByCategoryId" returnQName="retNS:getProductsByCategoryIdReturn" returnType="rtns:ProductDTO" soapAction="">
+        <parameter xmlns:pns="http://amazon.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:categoryId" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://amazon.com" xmlns:retNS="http://amazon.com" xmlns:rtns="http://dto.amazon.com" name="getAllProducts" qname="operNS:getAllProducts" returnQName="retNS:getAllProductsReturn" returnType="rtns:ProductDTO" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://amazon.com" xmlns:retNS="http://amazon.com" xmlns:rtns="http://dto.amazon.com" name="getSoldProducts" qname="operNS:getSoldProducts" returnQName="retNS:getSoldProductsReturn" returnType="rtns:ProductDTO" soapAction="">
+        <parameter xmlns:pns="http://amazon.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://amazon.com" xmlns:retNS="http://amazon.com" xmlns:rtns="http://dto.amazon.com" name="getBoughtProducts" qname="operNS:getBoughtProducts" returnQName="retNS:getBoughtProductsReturn" returnType="rtns:ProductDTO" soapAction="">
+        <parameter xmlns:pns="http://amazon.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://amazon.com" name="addToCart" qname="operNS:addToCart" soapAction="">
+        <parameter xmlns:pns="http://amazon.com" xmlns:tns="http://dto.amazon.com" qname="pns:shoppingCartDTO" type="tns:ShoppingCartDTO"/>
+      </operation>
+      <operation xmlns:operNS="http://amazon.com" xmlns:retNS="http://amazon.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="createUser" qname="operNS:createUser" returnQName="retNS:createUserReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://amazon.com" xmlns:tns="http://dto.amazon.com" qname="pns:signUpDTO" type="tns:SignUpDTO"/>
+      </operation>
+      <operation xmlns:operNS="http://amazon.com" name="addProduct" qname="operNS:addProduct" soapAction="">
+        <parameter xmlns:pns="http://amazon.com" xmlns:tns="http://dto.amazon.com" qname="pns:productDTO" type="tns:ProductDTO"/>
+      </operation>
+      <parameter name="allowedMethods" value="authenticate createUser getBoughtProducts getSoldProducts addCategory addProduct getShoppingCart removeFromCart getAllCategories getShoppingCartItemCount getAllProducts checkout addToCart getProductsByCategoryId"/>
+
+      <typeMapping xmlns:ns="http://dto.amazon.com" qname="ns:SignUpDTO" type="java:com.amazon.dto.SignUpDTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://amazon.com" xmlns:cmp-ns="http://dto.amazon.com" qname="ns:ArrayOf_tns1_ProductDTO" type="java:com.amazon.dto.ProductDTO[]" innerType="cmp-ns:ProductDTO" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://dto.amazon.com" qname="ns:CategoryDTO" type="java:com.amazon.dto.CategoryDTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://dto.amazon.com" qname="ns:ProductDTO" type="java:com.amazon.dto.ProductDTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://dto.amazon.com" qname="ns:UserDTO" type="java:com.amazon.dto.UserDTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://dto.amazon.com" qname="ns:ShoppingCartDTO" type="java:com.amazon.dto.ShoppingCartDTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

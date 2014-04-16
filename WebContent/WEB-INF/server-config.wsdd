@@ -1,0 +1,108 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="D:\workspace273\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\273AmazonStoreWS\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:service name="ServiceProvider" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="addCategory" qname="ns1:addCategory" soapAction="" xmlns:ns1="http://amazon.com" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:categoryName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns2:operation>
+  <ns1:operation name="authenticate" qname="ns2:authenticate" returnQName="ns2:authenticateReturn" returnType="ns3:UserDTO" soapAction="" xmlns:ns2="http://amazon.com" xmlns:ns3="http://dto.amazon.com">
+   <ns1:parameter qname="ns2:username" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns2:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="checkout" qname="ns4:checkout" soapAction="" xmlns:ns4="http://amazon.com">
+   <ns1:parameter qname="ns4:userId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getShoppingCart" qname="ns5:getShoppingCart" returnQName="ns5:getShoppingCartReturn" returnType="ns6:ShoppingCartDTO" soapAction="" xmlns:ns5="http://amazon.com" xmlns:ns6="http://dto.amazon.com">
+   <ns1:parameter qname="ns5:userId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getShoppingCartItemCount" qname="ns7:getShoppingCartItemCount" returnQName="ns7:getShoppingCartItemCountReturn" returnType="xsd:int" soapAction="" xmlns:ns7="http://amazon.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns7:userId" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="removeFromCart" qname="ns8:removeFromCart" soapAction="" xmlns:ns8="http://amazon.com">
+   <ns1:parameter qname="ns8:userId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns8:productId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getAllCategories" qname="ns9:getAllCategories" returnQName="ns9:getAllCategoriesReturn" returnType="ns10:CategoryDTO" soapAction="" xmlns:ns10="http://dto.amazon.com" xmlns:ns9="http://amazon.com"/>
+  <ns1:operation name="getProductsByCategoryId" qname="ns11:getProductsByCategoryId" returnQName="ns11:getProductsByCategoryIdReturn" returnType="ns12:ProductDTO" soapAction="" xmlns:ns11="http://amazon.com" xmlns:ns12="http://dto.amazon.com">
+   <ns1:parameter qname="ns11:categoryId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getAllProducts" qname="ns13:getAllProducts" returnQName="ns13:getAllProductsReturn" returnType="ns14:ProductDTO" soapAction="" xmlns:ns13="http://amazon.com" xmlns:ns14="http://dto.amazon.com"/>
+  <ns1:operation name="getSoldProducts" qname="ns15:getSoldProducts" returnQName="ns15:getSoldProductsReturn" returnType="ns16:ProductDTO" soapAction="" xmlns:ns15="http://amazon.com" xmlns:ns16="http://dto.amazon.com">
+   <ns1:parameter qname="ns15:userId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getBoughtProducts" qname="ns17:getBoughtProducts" returnQName="ns17:getBoughtProductsReturn" returnType="ns18:ProductDTO" soapAction="" xmlns:ns17="http://amazon.com" xmlns:ns18="http://dto.amazon.com">
+   <ns1:parameter qname="ns17:userId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="addToCart" qname="ns19:addToCart" soapAction="" xmlns:ns19="http://amazon.com">
+   <ns1:parameter qname="ns19:shoppingCartDTO" type="ns20:ShoppingCartDTO" xmlns:ns20="http://dto.amazon.com"/>
+  </ns1:operation>
+  <ns1:operation name="createUser" qname="ns21:createUser" returnQName="ns21:createUserReturn" returnType="xsd:string" soapAction="" xmlns:ns21="http://amazon.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns21:signUpDTO" type="ns22:SignUpDTO" xmlns:ns22="http://dto.amazon.com"/>
+  </ns1:operation>
+  <ns1:operation name="addProduct" qname="ns23:addProduct" soapAction="" xmlns:ns23="http://amazon.com">
+   <ns1:parameter qname="ns23:productDTO" type="ns24:ProductDTO" xmlns:ns24="http://dto.amazon.com"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="authenticate createUser getBoughtProducts getSoldProducts addCategory addProduct getShoppingCart removeFromCart getAllCategories getShoppingCartItemCount getAllProducts checkout addToCart getProductsByCategoryId"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="ServiceProvider"/>
+  <ns1:parameter name="className" value="com.amazon.ServiceProvider"/>
+  <ns1:parameter name="wsdlServicePort" value="ServiceProvider"/>
+  <ns1:parameter name="schemaQualified" value="http://dto.amazon.com,http://amazon.com"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://amazon.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="ServiceProviderService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns25:SignUpDTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.amazon.dto.SignUpDTO" xmlns:ns25="http://dto.amazon.com"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns26:CategoryDTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.amazon.dto.CategoryDTO" xmlns:ns26="http://dto.amazon.com"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns27:ProductDTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.amazon.dto.ProductDTO" xmlns:ns27="http://dto.amazon.com"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns28:UserDTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.amazon.dto.UserDTO" xmlns:ns28="http://dto.amazon.com"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns29:ShoppingCartDTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.amazon.dto.ShoppingCartDTO" xmlns:ns29="http://dto.amazon.com"/>
+  <ns1:arrayMapping innerType="ns31:ProductDTO" languageSpecificType="java:com.amazon.dto.ProductDTO[]" qname="ns30:ArrayOf_tns1_ProductDTO" xmlns:ns30="http://amazon.com" xmlns:ns31="http://dto.amazon.com"/>
+ </ns1:service>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>
